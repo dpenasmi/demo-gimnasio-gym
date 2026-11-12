@@ -37,9 +37,27 @@ const classes = [
   },
   {
     title: "Movilidad",
-    image: "movilidad",
+    image: "movilidad-grupo",
     tag: "MUÉVETE A TU RITMO",
     desc: "Recupera amplitud, equilibrio y buenas sensaciones.",
+  },
+  {
+    title: "Boxeo",
+    image: "boxeo",
+    tag: "ENCUENTRA TU GOLPE",
+    desc: "Aprende técnica, trabaja tu coordinación y libera energía.",
+  },
+  {
+    title: "Spinning",
+    image: "spinning",
+    tag: "PEDALEA CON OTRA ENERGÍA",
+    desc: "Música, resistencia y un grupo que te impulsa a seguir.",
+  },
+  {
+    title: "Yoga",
+    image: "yoga",
+    tag: "ENCUENTRA TU EQUILIBRIO",
+    desc: "Conecta movimiento y respiración. Dedícate un momento para ti.",
   },
 ];
 const faqs = [
@@ -57,7 +75,7 @@ const faqs = [
   ],
   [
     "¿Hay clases en grupo?",
-    "Sí. Puedes descubrir circuito, fuerza en grupo y movilidad. Consulta el horario de ejemplo y encuentra tu ritmo.",
+    "Sí. Puedes descubrir circuito, fuerza en grupo, movilidad, boxeo, spinning y kickboxing. Consulta el horario de ejemplo y encuentra tu ritmo.",
   ],
 ];
 ---
@@ -73,7 +91,11 @@ const faqs = [
       content="Demo de gimnasio en Barcelona. Fuerza, funcional, entrenamiento personal y movilidad. Tu primer día, a tu ritmo. Una creación de DPM Evolución Digital."
     />
     <meta name="theme-color" content="#000000" />
-    <link rel="icon" type="image/svg+xml" href="/demo-gimnasio-gym/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/demo-gimnasio-gym/favicon.svg"
+    />
   </head>
   <body>
     <a class="skip-link" href="#contenido">
@@ -151,7 +173,7 @@ const faqs = [
           </a>
         </div>
       </section>
-      
+
       <section
         class="rhythm-banner"
         aria-label="No hace falta entrenar como Rocky. Hace falta encontrar tu ritmo. Los campeones también empezaron un día. Hoy puede ser el tuyo."
@@ -171,13 +193,13 @@ const faqs = [
               <span class="rhythm-banner__line">
                 LOS CAMPEONES TAMBIÉN EMPEZARON UN DÍA.
               </span>
-              <span class="rhythm-banner__line">
-                HOY PUEDE SER EL TUYO.
-              </span>
+              <span class="rhythm-banner__line">HOY PUEDE SER EL TUYO.</span>
             </p>
           </div>
 
-          <span class="rhythm-banner__arrow" aria-hidden="true">↗</span>
+          <span class="rhythm-banner__arrow" aria-hidden="true">
+            ↗
+          </span>
 
           <button
             class="rhythm-banner__pause"
@@ -225,9 +247,9 @@ const faqs = [
             </div>
             <div class="slider-controls">
               <div class="slider-dots" aria-hidden="true">
-                <i class="active"></i>
-                <i></i>
-                <i></i>
+                {classes.map((_, index) => (
+                  <i class:list={{ active: index === 0 }}></i>
+                ))}
               </div>
               <button data-slide="-1" aria-label="Clases anteriores">
                 ←
@@ -237,7 +259,11 @@ const faqs = [
               </button>
             </div>
           </div>
-          <div class="class-slider" tabindex="0" aria-label="Clases de entrenamiento">
+          <div
+            class="class-slider"
+            tabindex="0"
+            aria-label="Clases de entrenamiento"
+          >
             {classes.map((item) => (
               <article class="class-card">
                 <img
@@ -356,7 +382,8 @@ const faqs = [
           ))}
         </div>
         <p class="community-caption">
-          Aquí entrenamos a los campeones del barrio<span>Y todo empieza por venir.</span>
+          Aquí entrenamos a los campeones del barrio
+          <span>Y todo empieza por venir.</span>
         </p>
       </section>
       <section class="section container first-session" id="primera-sesion">
@@ -517,12 +544,12 @@ const faqs = [
         </a>
       </div>
     </footer>
-    <dialog id="schedule-dialog" class="modal">
+    <dialog id="schedule-dialog" class="modal" aria-labelledby="schedule-title">
       <button class="modal-close" data-close aria-label="Cerrar horarios">
         ×
       </button>
       <p class="eyebrow">ENCUENTRA TU MOMENTO</p>
-      <h2>Horarios de clases</h2>
+      <h2 id="schedule-title">Horarios de clases</h2>
       <p class="modal-note">Horario ilustrativo de esta demo.</p>
       <div class="table-scroll">
         <table>
@@ -556,30 +583,29 @@ const faqs = [
         Reserva tu prueba ↗
       </a>
     </dialog>
-   
-    <dialog id="spot-dialog" class="modal spot-modal">
-        <button
-            class="modal-close"
-            data-close
-            aria-label="Cerrar spot"
-        >
-            ×
-        </button>
 
-        <p class="eyebrow">GYM PRESENTA</p>
-        <h2>TÚ PUEDES</h2>
+    <dialog
+      id="spot-dialog"
+      class="modal spot-modal"
+      aria-labelledby="spot-title"
+    >
+      <button class="modal-close" data-close aria-label="Cerrar spot">
+        ×
+      </button>
 
-        <div class="video-frame">
-            <iframe
-                id="spot-youtube"
-                title="TÚ PUEDES · Spot GYM"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-            ></iframe>
-        </div>
+      <p class="eyebrow">GYM PRESENTA</p>
+      <h2 id="spot-title">TÚ PUEDES</h2>
+
+      <div class="video-frame">
+        <iframe
+          id="spot-youtube"
+          title="TÚ PUEDES · Spot GYM"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
     </dialog>
-
 
     <script>
       const menu = document.querySelector<HTMLButtonElement>(".menu-toggle");
@@ -593,43 +619,90 @@ const faqs = [
       nav?.querySelectorAll("a").forEach((a) =>
         a.addEventListener("click", () => {
           menu?.setAttribute("aria-expanded", "false");
+          menu?.setAttribute("aria-label", "Abrir menú");
           nav.classList.remove("open");
         }),
       );
+      // Carrusel: un índice y un indicador por actividad.
       const slider = document.querySelector<HTMLElement>(".class-slider");
-      document.querySelectorAll<HTMLButtonElement>("[data-slide]").forEach((b) =>
-        b.addEventListener("click", () => {
-          if (!slider) return;
-          const card = slider.querySelector<HTMLElement>(".class-card");
-          slider.scrollBy({
-            left:
-              (card!.offsetWidth + parseFloat(getComputedStyle(slider).gap)) *
-              Number(b.dataset.slide),
-            behavior: "smooth",
+
+      if (slider) {
+        const cards = Array.from(
+          slider.querySelectorAll<HTMLElement>(".class-card"),
+        );
+        const section = slider.closest(".classes-section");
+        const dotsContainer =
+          section?.querySelector<HTMLElement>(".slider-dots");
+        const previousButton =
+          section?.querySelector<HTMLButtonElement>('[data-slide="-1"]');
+        const nextButton =
+          section?.querySelector<HTMLButtonElement>('[data-slide="1"]');
+        const reducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        );
+
+        let currentIndex = 0;
+        const dots = cards.map(() => document.createElement("i"));
+        dotsContainer?.replaceChildren(...dots);
+
+        const updateControls = () => {
+          dots.forEach((dot, index) => {
+            dot.classList.toggle("active", index === currentIndex);
           });
-        }),
-      );
-      slider?.addEventListener(
-        "scroll",
-        () => {
-          const card = slider.querySelector<HTMLElement>(".class-card");
-          const index = Math.round(
-            slider.scrollLeft /
-              (card!.offsetWidth + parseFloat(getComputedStyle(slider).gap)),
-          );
-          document
-            .querySelectorAll(".slider-dots i")
-            .forEach((dot, i) => dot.classList.toggle("active", i === index));
-        },
-        { passive: true },
-      );
-      const schedule = document.querySelector<HTMLDialogElement>("#schedule-dialog");
+          cards.forEach((card, index) => {
+            if (index === currentIndex) {
+              card.setAttribute("aria-current", "true");
+            } else {
+              card.removeAttribute("aria-current");
+            }
+          });
+          if (previousButton) previousButton.disabled = currentIndex === 0;
+          if (nextButton) {
+            nextButton.disabled =
+              !cards.length || currentIndex === cards.length - 1;
+          }
+        };
+
+        const showCard = (index: number, animate = true) => {
+          if (!cards.length) return;
+          currentIndex = Math.max(0, Math.min(index, cards.length - 1));
+          const targetLeft =
+            cards[currentIndex].getBoundingClientRect().left -
+            cards[0].getBoundingClientRect().left;
+
+          slider.scrollTo({
+            left: targetLeft,
+            behavior: animate && !reducedMotion.matches ? "smooth" : "instant",
+          });
+          updateControls();
+        };
+
+        previousButton?.addEventListener("click", () => {
+          showCard(currentIndex - 1);
+        });
+        nextButton?.addEventListener("click", () => {
+          showCard(currentIndex + 1);
+        });
+        slider.addEventListener("keydown", (event) => {
+          if (event.target !== slider) return;
+          if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            event.preventDefault();
+            showCard(currentIndex + (event.key === "ArrowRight" ? 1 : -1));
+          }
+        });
+        window.addEventListener("resize", () => showCard(currentIndex, false));
+        showCard(0, false);
+      }
+
+      const schedule =
+        document.querySelector<HTMLDialogElement>("#schedule-dialog");
       const spot = document.querySelector<HTMLDialogElement>("#spot-dialog");
       const openModal = (dialog: HTMLDialogElement | null) => {
-        dialog?.showModal();
+        if (!dialog || dialog.open) return;
+        dialog.showModal();
         document.body.classList.add("modal-open");
       };
-            // Abrir la ventana de horarios.
+      // Abrir la ventana de horarios.
       document
         .querySelector("#schedule-open")
         ?.addEventListener("click", () => openModal(schedule));
@@ -653,36 +726,41 @@ const faqs = [
       });
 
       // Cerrar las ventanas con su botón o pulsando fuera.
-      document.querySelectorAll<HTMLDialogElement>("dialog").forEach((dialog) => {
-        dialog
-          .querySelector("[data-close]")
-          ?.addEventListener("click", () => dialog.close());
+      document
+        .querySelectorAll<HTMLDialogElement>("dialog")
+        .forEach((dialog) => {
+          dialog
+            .querySelector("[data-close]")
+            ?.addEventListener("click", () => dialog.close());
 
-        dialog.addEventListener("click", (event) => {
-          if (event.target !== dialog) return;
+          dialog.addEventListener("click", (event) => {
+            if (event.target !== dialog) return;
 
-          const rect = dialog.getBoundingClientRect();
+            const rect = dialog.getBoundingClientRect();
 
-          const clickedOutside =
-            event.clientX < rect.left ||
-            event.clientX > rect.right ||
-            event.clientY < rect.top ||
-            event.clientY > rect.bottom;
+            const clickedOutside =
+              event.clientX < rect.left ||
+              event.clientX > rect.right ||
+              event.clientY < rect.top ||
+              event.clientY > rect.bottom;
 
-          if (clickedOutside) {
-            dialog.close();
-          }
+            if (clickedOutside) {
+              dialog.close();
+            }
+          });
+
+          dialog.addEventListener("close", () => {
+            document.body.classList.toggle(
+              "modal-open",
+              document.querySelector("dialog[open]") !== null,
+            );
+
+            // Detener el vídeo al cerrar la ventana del spot.
+            if (dialog.id === "spot-dialog") {
+              youtubePlayer?.removeAttribute("src");
+            }
+          });
         });
-
-        dialog.addEventListener("close", () => {
-          document.body.classList.remove("modal-open");
-
-          // Detener el vídeo al cerrar la ventana del spot.
-          if (dialog.id === "spot-dialog") {
-            youtubePlayer?.removeAttribute("src");
-          }
-        });
-      });
 
       // Cerrar los horarios al ir al formulario de reserva.
       document
@@ -695,8 +773,7 @@ const faqs = [
         ?.addEventListener("submit", (event) => {
           event.preventDefault();
 
-          const status =
-            document.querySelector<HTMLElement>("#form-status");
+          const status = document.querySelector<HTMLElement>("#form-status");
 
           if (status) {
             status.hidden = false;
@@ -704,134 +781,136 @@ const faqs = [
               "¡Ya has dado el primer paso! Has completado la reserva de demostración. No se han enviado ni guardado tus datos.";
           }
         });
-    
-        // Franja que alterna frases y colores.
-        {
+
+      // Franja que alterna frases y colores.
+      {
         const banner = document.querySelector<HTMLElement>(".rhythm-banner");
 
-        if (banner) {
-            const messages = Array.from(
+        if (banner && banner.querySelector(".rhythm-banner__message")) {
+          const messages = Array.from(
             banner.querySelectorAll<HTMLElement>(".rhythm-banner__message"),
-            );
+          );
 
-            const pauseButton = banner.querySelector<HTMLButtonElement>(
+          const pauseButton = banner.querySelector<HTMLButtonElement>(
             ".rhythm-banner__pause",
-            );
+          );
 
-            const reducedMotion = window.matchMedia(
+          const reducedMotion = window.matchMedia(
             "(prefers-reduced-motion: reduce)",
-            );
+          );
 
-            let currentMessage = 0;
-            let isVisible = false;
-            let isPaused = false;
-            let timer: ReturnType<typeof setInterval> | undefined;
+          let currentMessage = 0;
+          let isVisible = false;
+          let isPaused = false;
+          let timer: ReturnType<typeof setInterval> | undefined;
 
-            // Prepara las letras manteniendo cada palabra unida.
-            // Todas las letras reservan su espacio antes de aparecer.
-            messages.forEach((message) => {
+          // Prepara las letras manteniendo cada palabra unida.
+          // Todas las letras reservan su espacio antes de aparecer.
+          messages.forEach((message) => {
             let letterIndex = 0;
 
             message
-                .querySelectorAll<HTMLElement>(".rhythm-banner__line")
-                .forEach((line) => {
-                const text = line.textContent ?? "";
+              .querySelectorAll<HTMLElement>(".rhythm-banner__line")
+              .forEach((line) => {
+                const text = (line.textContent ?? "")
+                  .trim()
+                  .replace(/\s+/g, " ");
                 const fragment = document.createDocumentFragment();
 
                 text.split(/(\s+)/).forEach((part) => {
-                    if (/^\s+$/.test(part)) {
+                  if (/^\s+$/.test(part)) {
                     fragment.append(document.createTextNode(part));
                     return;
-                    }
+                  }
 
-                    const word = document.createElement("span");
-                    word.className = "rhythm-banner__word";
+                  const word = document.createElement("span");
+                  word.className = "rhythm-banner__word";
 
-                    Array.from(part).forEach((character) => {
+                  Array.from(part).forEach((character) => {
                     const letter = document.createElement("span");
 
                     letter.className = "rhythm-banner__letter";
                     letter.textContent = character;
                     letter.style.setProperty(
-                        "--letter-delay",
-                        `${letterIndex * 35}ms`,
+                      "--letter-delay",
+                      `${letterIndex * 35}ms`,
                     );
 
                     word.append(letter);
                     letterIndex += 1;
-                    });
+                  });
 
-                    fragment.append(word);
+                  fragment.append(word);
                 });
 
                 line.replaceChildren(fragment);
-                });
-            });
+              });
+          });
 
-            const showMessage = () => {
+          const showMessage = () => {
             messages.forEach((message, index) => {
-                message.classList.toggle("is-active", index === currentMessage);
+              message.classList.toggle("is-active", index === currentMessage);
             });
 
             banner.classList.toggle("is-dark", currentMessage === 1);
-            };
+          };
 
-            const stopAnimation = () => {
+          const stopAnimation = () => {
             if (timer !== undefined) {
-                window.clearInterval(timer);
-                timer = undefined;
+              window.clearInterval(timer);
+              timer = undefined;
             }
 
             // Al detenerla, deja la frase completa visible.
             banner.classList.remove("is-animating");
-            };
+          };
 
-            const updateAnimation = () => {
+          const updateAnimation = () => {
             stopAnimation();
 
             if (
-                !isVisible ||
-                isPaused ||
-                document.hidden ||
-                reducedMotion.matches
+              !isVisible ||
+              isPaused ||
+              document.hidden ||
+              reducedMotion.matches
             ) {
-                return;
+              return;
             }
 
             banner.classList.add("is-animating");
 
             timer = window.setInterval(() => {
-                currentMessage = (currentMessage + 1) % messages.length;
-                showMessage();
+              currentMessage = (currentMessage + 1) % messages.length;
+              showMessage();
             }, 5500);
-            };
+          };
 
-            pauseButton?.addEventListener("click", () => {
+          pauseButton?.addEventListener("click", () => {
             isPaused = !isPaused;
 
             pauseButton.setAttribute("aria-pressed", String(isPaused));
             pauseButton.textContent = isPaused
-                ? "Reanudar animación"
-                : "Pausar animación";
+              ? "Reanudar animación"
+              : "Pausar animación";
 
             updateAnimation();
-            });
+          });
 
-            const observer = new IntersectionObserver(
+          const observer = new IntersectionObserver(
             ([entry]) => {
-                isVisible = entry.isIntersecting;
-                updateAnimation();
+              if (isVisible === entry.isIntersecting) return;
+              isVisible = entry.isIntersecting;
+              updateAnimation();
             },
             { threshold: 0.15 },
-            );
+          );
 
-            observer.observe(banner);
+          observer.observe(banner);
 
-            document.addEventListener("visibilitychange", updateAnimation);
-            reducedMotion.addEventListener("change", updateAnimation);
+          document.addEventListener("visibilitychange", updateAnimation);
+          reducedMotion.addEventListener("change", updateAnimation);
         }
-        }
-
+      }
     </script>
   </body>
 </html>
