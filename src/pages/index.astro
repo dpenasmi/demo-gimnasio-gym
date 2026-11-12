@@ -1,0 +1,96 @@
+---
+import '../styles/global.css';
+const trainings = [
+ {title:'Fuerza',image:'fuerza',desc:'Construye tu fuerza, repetición a repetición.'},
+ {title:'Funcional',image:'funcional',desc:'Muévete mejor. Gana energía para tu día.'},
+ {title:'Entrenamiento personal',image:'personal',desc:'Tu objetivo, con alguien a tu lado.'},
+ {title:'Movilidad',image:'movilidad',desc:'Encuentra espacio para moverte y respirar.'}
+];
+const classes = [
+ {title:'Circuito',image:'circuito',tag:'ENERGÍA EN EQUIPO',desc:'Un entrenamiento completo para salir con otra energía.'},
+ {title:'Fuerza en grupo',image:'grupo',tag:'JUNTOS, MÁS FUERTES',desc:'Técnica, fuerza y un grupo que te acompaña.'},
+ {title:'Movilidad',image:'movilidad',tag:'MUÉVETE A TU RITMO',desc:'Recupera amplitud, equilibrio y buenas sensaciones.'}
+];
+const faqs = [
+ ['¿Puedo empezar de cero?','Claro. Tu primera sesión empieza por conocerte. Adaptamos los ejercicios y la intensidad a tu punto de partida.'],
+ ['¿Qué tengo que traer?','Ropa cómoda, zapatillas deportivas, una toalla y agua. Del resto, nos encargamos juntos.'],
+ ['¿Cómo reservo mi prueba?','Completa el formulario y elige la franja que prefieres. En esta demo puedes probar el recorrido sin enviar tus datos.'],
+ ['¿Hay clases en grupo?','Sí. Puedes descubrir circuito, fuerza en grupo y movilidad. Consulta el horario de ejemplo y encuentra tu ritmo.']
+];
+---
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <title>A Tu Ritmo · Tu primera repetición empieza aquí</title>
+ <meta name="description" content="Demo de gimnasio en Barcelona. Fuerza, funcional, entrenamiento personal y movilidad. Tu primer día, a tu ritmo. Una creación de DPM Evolución Digital."/>
+ <meta name="theme-color" content="#000000"/>
+ <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+</head>
+<body>
+ <a class="skip-link" href="#contenido">Saltar al contenido</a>
+ <header class="header">
+  <div class="header-inner">
+   <a class="wordmark" href="#inicio" aria-label="A Tu Ritmo, inicio">A TU<br/>RITMO<span class="brand-dot">.</span></a>
+   <nav id="main-nav" aria-label="Navegación principal">
+    <a href="#clases">Clases</a><a href="#gimnasio">El gimnasio</a><a href="#comunidad">Comunidad</a>
+   </nav>
+   <a class="button header-cta" href="#reserva">Reserva tu prueba <span aria-hidden="true">↗</span></a>
+   <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav"><span></span><span></span></button>
+  </div>
+ </header>
+ <main id="contenido">
+  <section class="hero" id="inicio" aria-labelledby="hero-title">
+   <img class="hero-image" src="/images/hero.webp" alt="Una entrenadora acompaña a una mujer durante su entrenamiento de fuerza" fetchpriority="high" width="1536" height="1024"/>
+   <div class="hero-shade"></div>
+   <div class="hero-content container">
+    <p class="eyebrow"><span></span> BARCELONA · TU BARRIO. TU GIMNASIO.</p>
+    <h1 id="hero-title">Todo empieza<br/>con una<br/><span>repetición.</span></h1>
+    <p class="hero-subtitle">Tu gimnasio en Barcelona.<br class="mobile-only"/> Tu punto de partida.</p>
+    <div class="hero-actions"><a class="button" href="#reserva">Reserva tu prueba <span aria-hidden="true">↗</span></a><button class="button button-white" data-spot>Ver el spot <span aria-hidden="true">▶</span></button></div>
+   </div>
+   <div class="hero-bottom container"><span>FUERZA · CONFIANZA · COMUNIDAD</span><a href="#entrenamientos" aria-label="Descubre los entrenamientos">BAJA Y DESCÚBRELO <span aria-hidden="true">↓</span></a></div>
+  </section>
+  <section class="statement" aria-label="Tu primer día, a tu ritmo"><div class="container"><p>Tu primer día.<br/>A tu ritmo<span>.</span></p><span class="statement-arrow" aria-hidden="true">↗</span></div></section>
+  <section class="section container" id="entrenamientos">
+   <div class="section-heading"><h2>Entrena como quieras</h2><p>Encuentra lo que te mueve.</p></div>
+   <div class="training-grid">{trainings.map((item,i)=><a class="training-card" href="#reserva"><div class="image-wrap"><img src={`/images/${item.image}.webp`} alt={item.desc} width="320" height="490" loading="lazy"/><span class="card-number">0{i+1}</span><span class="card-arrow" aria-hidden="true">↗</span></div><h3>{item.title}</h3><p>{item.desc}</p></a>)}</div>
+  </section>
+  <section class="section classes-section" id="clases">
+   <div class="container"><div class="section-heading"><div><p class="eyebrow">BUENA ENERGÍA. MEJOR COMPAÑÍA.</p><h2>Clases en grupo</h2></div><div class="slider-controls"><div class="slider-dots" aria-hidden="true"><i class="active"></i><i></i><i></i></div><button data-slide="-1" aria-label="Clases anteriores">←</button><button data-slide="1" aria-label="Clases siguientes">→</button></div></div>
+    <div class="class-slider" tabindex="0" aria-label="Clases de entrenamiento">{classes.map(item=><article class="class-card"><img src={`/images/${item.image}.webp`} alt={`Entrenamiento de ${item.title.toLowerCase()}`} width="500" height="450" loading="lazy"/><div class="class-info"><span>{item.tag}</span><h3>{item.title}</h3><p>{item.desc}</p></div></article>)}</div>
+    <div class="center"><button class="button" id="schedule-open">Ver horarios <span aria-hidden="true">↗</span></button></div>
+   </div>
+  </section>
+  <section class="spot-section" id="spot"><img src="/images/spot.webp" alt="Detalle de una mano sujetando una mancuerna en el gimnasio" width="650" height="650" loading="lazy"/><div class="spot-gradient"></div><div class="container spot-content"><p class="eyebrow">CADA VICTORIA TIENE UN PRINCIPIO</p><h2>La primera<br/>repetición</h2><button class="play-link" data-spot><span class="play-circle" aria-hidden="true">▶</span>Ver el spot</button></div></section>
+  <section class="section container" id="gimnasio"><div class="section-heading"><h2>Conoce el<br/>gimnasio</h2><p>Un espacio para dar tu siguiente paso.</p></div><div class="spaces-grid"><figure><img src="/images/sala.webp" alt="Sala de fuerza con bancos, discos y estructuras de entrenamiento" width="650" height="375" loading="lazy"/><figcaption>Sala de fuerza <span aria-hidden="true">↗</span></figcaption></figure><figure><img src="/images/zona.webp" alt="Zona funcional con kettlebells, cajones y césped" width="650" height="375" loading="lazy"/><figcaption>Zona funcional <span aria-hidden="true">↗</span></figcaption></figure></div></section>
+  <section class="section community-section container" id="comunidad"><div class="section-heading"><h2>La gente que<br/>le da vida</h2><p>Gente real. Objetivos propios.<br/>Ganas compartidas.</p></div><div class="community-grid">{Array.from({length:6},(_,i)=><img src={`/images/comunidad-${i+1}.webp`} alt={['Un compañero sonríe después de entrenar','Una mujer disfruta de un descanso tras la sesión','Un entrenador felicita a una compañera','Una mujer entrena con cuerdas','Un compañero descansa sentado','Una compañera comparte una sonrisa'][i]} loading="lazy" width="420" height="420"/>)}</div><p class="community-caption">Aquí entrenamos a los campeones del barrio<span>Y todo empieza por venir.</span></p></section>
+  <section class="section container first-session" id="primera-sesion"><div><p class="eyebrow">NO TIENES QUE SABER POR DÓNDE EMPEZAR</p><h2>Tu primera<br/>sesión</h2><ol class="steps"><li><span>01</span><div><h3>Te recibimos</h3><p>Conoce el espacio y a quien te va a acompañar.</p></div></li><li><span>02</span><div><h3>Hablamos de tu objetivo</h3><p>Escuchamos qué buscas y desde dónde empiezas.</p></div></li><li><span>03</span><div><h3>Entrenamos contigo</h3><p>Una primera sesión adaptada a tu ritmo.</p></div></li></ol></div><img src="/images/sesion.webp" alt="Una entrenadora conversa con una nueva compañera en su primera sesión" width="650" height="560" loading="lazy"/></section>
+  <section class="section container faq-section" id="preguntas"><h2>Preguntas<br/>frecuentes</h2><div class="faq-list">{faqs.map(([q,a])=><details><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
+  <section class="booking-section" id="reserva"><div class="container"><p class="eyebrow">TU SIGUIENTE PASO EMPIEZA AQUÍ</p><h2>Reserva tu<br/>sesión de prueba<span>.</span></h2><form id="booking-form"><div class="form-grid"><label>Nombre<input name="nombre" placeholder="¿Cómo te llamas?" autocomplete="given-name" required maxlength="80"/></label><label>Teléfono<input name="telefono" type="tel" placeholder="Tu número de teléfono" autocomplete="tel" pattern="[+0-9 ()-]{9,20}" required/></label><label>Franja horaria<select name="franja" required><option value="">¿Cuándo te viene bien?</option><option>Mañana</option><option>Mediodía</option><option>Tarde</option></select></label></div><div class="form-bottom"><button class="button button-black" type="submit">Solicitar mi prueba <span aria-hidden="true">↗</span></button><p>Demo de DPM Evolución Digital.<br/>Este formulario no envía ni guarda datos.</p></div><p id="form-status" role="status" hidden></p></form></div></section>
+ </main>
+ <footer class="footer container"><div class="footer-main"><a class="wordmark" href="#inicio">A TU<br/>RITMO<span>.</span></a><div><h3>El gimnasio</h3><a href="#gimnasio">Instalaciones</a><a href="#primera-sesion">El equipo</a><a href="#comunidad">La comunidad</a></div><div><h3>Entrenamientos</h3><a href="#entrenamientos">Fuerza</a><a href="#entrenamientos">Funcional</a><a href="#entrenamientos">Entrenamiento personal</a><a href="#clases">Clases en grupo</a></div><div><h3>Contacto</h3><a href="#reserva">Reserva tu prueba</a><a href="#preguntas">Resuelve tus dudas</a><a href="#primera-sesion">Tu primera sesión</a></div><div><h3>Barcelona</h3><p>Tu barrio.<br/>Tu gimnasio.<br/>A tu ritmo.</p></div></div><div class="footer-bottom"><span>DEMO DE DPM EVOLUCIÓN DIGITAL</span><span>Diseñada para empezar. Hecha para seguir.</span><a href="#inicio" aria-label="Volver arriba">↑</a></div></footer>
+ <dialog id="schedule-dialog" class="modal"><button class="modal-close" data-close aria-label="Cerrar horarios">×</button><p class="eyebrow">ENCUENTRA TU MOMENTO</p><h2>Horarios de clases</h2><p class="modal-note">Horario ilustrativo de esta demo.</p><div class="table-scroll"><table><thead><tr><th>Clase</th><th>Días</th><th>Horario</th></tr></thead><tbody><tr><td>Circuito</td><td>Lun · Mié · Vie</td><td>09:00 · 18:30</td></tr><tr><td>Fuerza en grupo</td><td>Mar · Jue</td><td>10:00 · 19:00</td></tr><tr><td>Movilidad</td><td>Lun · Mié · Vie</td><td>12:00 · 20:00</td></tr></tbody></table></div><a class="button" href="#reserva" id="schedule-book">Reserva tu prueba ↗</a></dialog>
+ <dialog id="spot-dialog" class="modal spot-modal"><button class="modal-close" data-close aria-label="Cerrar spot">×</button><p class="eyebrow">A TU RITMO PRESENTA</p><h2>La primera repetición</h2><div class="video-frame"><video id="spot-video" controls playsinline preload="none" poster="/images/spot.webp" hidden></video><div id="spot-empty"><span class="play-circle" aria-hidden="true">▶</span><p>El siguiente paso es darle al play.</p><p class="modal-note">El spot estará disponible aquí cuando incorporemos el vídeo final.</p></div></div></dialog>
+ <script>
+  const menu = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.querySelector<HTMLElement>('#main-nav');
+  menu?.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');nav?.classList.toggle('open',open);});
+  nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu?.setAttribute('aria-expanded','false');nav.classList.remove('open');}));
+  const slider=document.querySelector<HTMLElement>('.class-slider');
+  document.querySelectorAll<HTMLButtonElement>('[data-slide]').forEach(b=>b.addEventListener('click',()=>{if(!slider)return;const card=slider.querySelector<HTMLElement>('.class-card');slider.scrollBy({left:(card!.offsetWidth+parseFloat(getComputedStyle(slider).gap))*Number(b.dataset.slide),behavior:'smooth'});}));
+  slider?.addEventListener('scroll',()=>{const card=slider.querySelector<HTMLElement>('.class-card');const index=Math.round(slider.scrollLeft/(card!.offsetWidth+parseFloat(getComputedStyle(slider).gap)));document.querySelectorAll('.slider-dots i').forEach((dot,i)=>dot.classList.toggle('active',i===index));},{passive:true});
+  const schedule=document.querySelector<HTMLDialogElement>('#schedule-dialog');
+  const spot=document.querySelector<HTMLDialogElement>('#spot-dialog');
+  const openModal=(dialog:HTMLDialogElement|null)=>{dialog?.showModal();document.body.classList.add('modal-open');};
+  document.querySelector('#schedule-open')?.addEventListener('click',()=>openModal(schedule));
+  document.querySelectorAll('[data-spot]').forEach(b=>b.addEventListener('click',()=>openModal(spot)));
+  document.querySelectorAll<HTMLDialogElement>('dialog').forEach(d=>{d.querySelector('[data-close]')?.addEventListener('click',()=>d.close());d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();}});d.addEventListener('close',()=>{document.body.classList.remove('modal-open');document.querySelector<HTMLVideoElement>('#spot-video')?.pause();});});
+  document.querySelector('#schedule-book')?.addEventListener('click',()=>schedule?.close());
+  document.querySelector<HTMLFormElement>('#booking-form')?.addEventListener('submit',e=>{e.preventDefault();const status=document.querySelector<HTMLElement>('#form-status');if(status){status.hidden=false;status.textContent='¡Ya has dado el primer paso! Has completado la reserva de demostración. No se han enviado ni guardado tus datos.';}});
+  // Add the final film to public/video/spot.mp4 and set its URL here to activate playback.
+  const spotUrl = '';
+  if(spotUrl){const video=document.querySelector<HTMLVideoElement>('#spot-video');if(video){video.src=spotUrl;video.hidden=false;document.querySelector<HTMLElement>('#spot-empty')!.hidden=true;}}
+ </script>
+</body>
+</html>
