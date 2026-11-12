@@ -1421,3 +1421,199 @@ h1 {
   object-fit: contain;
   background: #000;
 }
+
+.spot-modal .video-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.spot-modal .video-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Franja de frases animadas */
+.rhythm-banner {
+  --banner-background: #ffcd33;
+  --banner-color: #000;
+
+  overflow: hidden;
+  padding: 44px 0;
+  color: var(--banner-color);
+  background: var(--banner-background);
+}
+
+.rhythm-banner.is-dark {
+  --banner-background: #000;
+  --banner-color: #ffcd33;
+}
+
+.rhythm-banner__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding-bottom: 20px;
+}
+
+/* Las dos frases ocupan la misma celda.
+   La más alta reserva el espacio durante toda la animación. */
+.rhythm-banner__messages {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+
+.rhythm-banner__message {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  margin: 0;
+  font-family: "Archivo Black", Arial, sans-serif;
+  font-size: clamp(28px, 4.1vw, 82px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+}
+
+.rhythm-banner__message.is-active {
+  visibility: visible;
+}
+
+.rhythm-banner__line {
+  display: block;
+}
+
+.rhythm-banner__word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.rhythm-banner__letter {
+  display: inline-block;
+}
+
+/* Cada letra aparece de golpe, con un pequeño retraso respecto a la anterior. */
+.rhythm-banner.is-animating
+  .is-active
+  .rhythm-banner__letter {
+  animation: rhythm-letter-appear 1ms both;
+  animation-delay: var(--letter-delay);
+}
+
+.rhythm-banner__arrow {
+  flex-shrink: 0;
+  font-size: clamp(70px, 8vw, 130px);
+  line-height: 1;
+}
+
+.rhythm-banner__pause {
+  position: absolute;
+  right: 0;
+  bottom: -12px;
+  padding: 4px 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.rhythm-banner__pause:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+@keyframes rhythm-letter-appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 700px) {
+  .rhythm-banner {
+    padding: 32px 0;
+  }
+
+  .rhythm-banner__inner {
+    gap: 0;
+  }
+
+  .rhythm-banner__message {
+    font-size: clamp(24px, 6.4vw, 44px);
+  }
+
+  .rhythm-banner__arrow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rhythm-banner__letter {
+    animation: none !important;
+  }
+
+  .rhythm-banner__pause {
+    display: none;
+  }
+}
+
+/* Contenido de la franja a ancho completo */
+.rhythm-banner__inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 clamp(24px, 4vw, 80px) 24px;
+}
+
+/* Más presencia para la tipografía */
+.rhythm-banner__message {
+  font-size: clamp(36px, 5.5vw, 110px);
+}
+
+/* Mantiene el control dentro del margen lateral */
+.rhythm-banner__pause {
+  right: clamp(24px, 4vw, 80px);
+  bottom: -12px;
+}
+
+@media (max-width: 700px) {
+  .rhythm-banner__inner {
+    padding: 0 20px 24px;
+  }
+
+  .rhythm-banner__message {
+    font-size: clamp(24px, 6.4vw, 44px);
+  }
+
+  .rhythm-banner__pause {
+    right: 20px;
+  }
+}
+
+@media (min-width: 701px) {
+  .rhythm-banner__message {
+    font-size: clamp(24px, 3.3vw, 70px);
+  }
+
+  .rhythm-banner__line {
+    white-space: nowrap;
+  }
+
+  .rhythm-banner__arrow {
+    font-size: clamp(48px, 6vw, 110px);
+  }
+}

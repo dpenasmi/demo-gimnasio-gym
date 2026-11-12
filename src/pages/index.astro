@@ -151,17 +151,44 @@ const faqs = [
           </a>
         </div>
       </section>
-      <section class="statement" aria-label="Tu primer día, a tu ritmo">
-        <div class="container">
-          <p>
-            Tu primer día.
-            <br />A tu ritmo<span>.</span>
-          </p>
-          <span class="statement-arrow" aria-hidden="true">
-            ↗
-          </span>
+      
+      <section
+        class="rhythm-banner"
+        aria-label="No hace falta entrenar como Rocky. Hace falta encontrar tu ritmo. Los campeones también empiezan un día. Hoy puede ser el tuyo."
+      >
+        <div class="rhythm-banner__inner">
+          <div class="rhythm-banner__messages" aria-hidden="true">
+            <p class="rhythm-banner__message is-active">
+              <span class="rhythm-banner__line">
+                NO HACE FALTA ENTRENAR COMO ROCKY.
+              </span>
+              <span class="rhythm-banner__line">
+                HACE FALTA ENCONTRAR TU RITMO.
+              </span>
+            </p>
+
+            <p class="rhythm-banner__message">
+              <span class="rhythm-banner__line">
+                LOS CAMPEONES TAMBIÉN EMPIEZAN UN DÍA.
+              </span>
+              <span class="rhythm-banner__line">
+                HOY PUEDE SER EL TUYO.
+              </span>
+            </p>
+          </div>
+
+          <span class="rhythm-banner__arrow" aria-hidden="true">↗</span>
+
+          <button
+            class="rhythm-banner__pause"
+            type="button"
+            aria-pressed="false"
+          >
+            Pausar animación
+          </button>
         </div>
       </section>
+
       <section class="section container" id="entrenamientos">
         <div class="section-heading">
           <h2>Entrena como quieras</h2>
@@ -529,32 +556,31 @@ const faqs = [
         Reserva tu prueba ↗
       </a>
     </dialog>
+   
     <dialog id="spot-dialog" class="modal spot-modal">
-      <button class="modal-close" data-close aria-label="Cerrar spot">
-        ×
-      </button>
-      <p class="eyebrow">GYM PRESENTA</p>
-      <h2>TÚ PUEDES</h2>
-      <div class="video-frame">
-        <video
-          id="spot-video"
-          controls
-          playsinline
-          preload="none"
-          poster="/demo-gimnasio-gym/images/spot-portada.webp"
-          hidden
-        ></video>
-        <div id="spot-empty">
-          <span class="play-circle" aria-hidden="true">
-            ▶
-          </span>
-          <p>El siguiente paso es darle al play.</p>
-          <p class="modal-note">
-            El spot estará disponible aquí cuando incorporemos el vídeo final.
-          </p>
+        <button
+            class="modal-close"
+            data-close
+            aria-label="Cerrar spot"
+        >
+            ×
+        </button>
+
+        <p class="eyebrow">GYM PRESENTA</p>
+        <h2>TÚ PUEDES</h2>
+
+        <div class="video-frame">
+            <iframe
+                id="spot-youtube"
+                title="TÚ PUEDES · Spot GYM"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+            ></iframe>
         </div>
-      </div>
     </dialog>
+
+
     <script>
       const menu = document.querySelector<HTMLButtonElement>(".menu-toggle");
       const nav = document.querySelector<HTMLElement>("#main-nav");
@@ -603,55 +629,209 @@ const faqs = [
         dialog?.showModal();
         document.body.classList.add("modal-open");
       };
+            // Abrir la ventana de horarios.
       document
         .querySelector("#schedule-open")
         ?.addEventListener("click", () => openModal(schedule));
-      document
-        .querySelectorAll("[data-spot]")
-        .forEach((b) => b.addEventListener("click", () => openModal(spot)));
-      document.querySelectorAll<HTMLDialogElement>("dialog").forEach((d) => {
-        d.querySelector("[data-close]")?.addEventListener("click", () => d.close());
-        d.addEventListener("click", (e) => {
-          if (e.target === d) {
-            const r = d.getBoundingClientRect();
-            if (
-              e.clientX < r.left ||
-              e.clientX > r.right ||
-              e.clientY < r.top ||
-              e.clientY > r.bottom
-            )
-              d.close();
+
+      // Reproductor de YouTube.
+      const youtubePlayer =
+        document.querySelector<HTMLIFrameElement>("#spot-youtube");
+
+      const youtubeUrl =
+        "https://www.youtube-nocookie.com/embed/9X0jQtDB_qs?autoplay=1&playsinline=1&controls=0";
+
+      // Abrir el spot y cargar el vídeo.
+      document.querySelectorAll("[data-spot]").forEach((button) => {
+        button.addEventListener("click", () => {
+          openModal(spot);
+
+          if (youtubePlayer) {
+            youtubePlayer.src = youtubeUrl;
           }
         });
-        d.addEventListener("close", () => {
+      });
+
+      // Cerrar las ventanas con su botón o pulsando fuera.
+      document.querySelectorAll<HTMLDialogElement>("dialog").forEach((dialog) => {
+        dialog
+          .querySelector("[data-close]")
+          ?.addEventListener("click", () => dialog.close());
+
+        dialog.addEventListener("click", (event) => {
+          if (event.target !== dialog) return;
+
+          const rect = dialog.getBoundingClientRect();
+
+          const clickedOutside =
+            event.clientX < rect.left ||
+            event.clientX > rect.right ||
+            event.clientY < rect.top ||
+            event.clientY > rect.bottom;
+
+          if (clickedOutside) {
+            dialog.close();
+          }
+        });
+
+        dialog.addEventListener("close", () => {
           document.body.classList.remove("modal-open");
-          document.querySelector<HTMLVideoElement>("#spot-video")?.pause();
+
+          // Detener el vídeo al cerrar la ventana del spot.
+          if (dialog.id === "spot-dialog") {
+            youtubePlayer?.removeAttribute("src");
+          }
         });
       });
+
+      // Cerrar los horarios al ir al formulario de reserva.
       document
         .querySelector("#schedule-book")
         ?.addEventListener("click", () => schedule?.close());
+
+      // Formulario de demostración: no envía ni guarda datos.
       document
         .querySelector<HTMLFormElement>("#booking-form")
-        ?.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const status = document.querySelector<HTMLElement>("#form-status");
+        ?.addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          const status =
+            document.querySelector<HTMLElement>("#form-status");
+
           if (status) {
             status.hidden = false;
             status.textContent =
               "¡Ya has dado el primer paso! Has completado la reserva de demostración. No se han enviado ni guardado tus datos.";
           }
         });
-      // Add the final film to public/video/spot.mp4 and set its URL here to activate playback.
-      const spotUrl = "/demo-gimnasio-gym/video/spot.mp4";
-      if (spotUrl) {
-        const video = document.querySelector<HTMLVideoElement>("#spot-video");
-        if (video) {
-          video.src = spotUrl;
-          video.hidden = false;
-          document.querySelector<HTMLElement>("#spot-empty")!.hidden = true;
+    
+        // Franja que alterna frases y colores.
+        {
+        const banner = document.querySelector<HTMLElement>(".rhythm-banner");
+
+        if (banner) {
+            const messages = Array.from(
+            banner.querySelectorAll<HTMLElement>(".rhythm-banner__message"),
+            );
+
+            const pauseButton = banner.querySelector<HTMLButtonElement>(
+            ".rhythm-banner__pause",
+            );
+
+            const reducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+            );
+
+            let currentMessage = 0;
+            let isVisible = false;
+            let isPaused = false;
+            let timer: ReturnType<typeof setInterval> | undefined;
+
+            // Prepara las letras manteniendo cada palabra unida.
+            // Todas las letras reservan su espacio antes de aparecer.
+            messages.forEach((message) => {
+            let letterIndex = 0;
+
+            message
+                .querySelectorAll<HTMLElement>(".rhythm-banner__line")
+                .forEach((line) => {
+                const text = line.textContent ?? "";
+                const fragment = document.createDocumentFragment();
+
+                text.split(/(\s+)/).forEach((part) => {
+                    if (/^\s+$/.test(part)) {
+                    fragment.append(document.createTextNode(part));
+                    return;
+                    }
+
+                    const word = document.createElement("span");
+                    word.className = "rhythm-banner__word";
+
+                    Array.from(part).forEach((character) => {
+                    const letter = document.createElement("span");
+
+                    letter.className = "rhythm-banner__letter";
+                    letter.textContent = character;
+                    letter.style.setProperty(
+                        "--letter-delay",
+                        `${letterIndex * 35}ms`,
+                    );
+
+                    word.append(letter);
+                    letterIndex += 1;
+                    });
+
+                    fragment.append(word);
+                });
+
+                line.replaceChildren(fragment);
+                });
+            });
+
+            const showMessage = () => {
+            messages.forEach((message, index) => {
+                message.classList.toggle("is-active", index === currentMessage);
+            });
+
+            banner.classList.toggle("is-dark", currentMessage === 1);
+            };
+
+            const stopAnimation = () => {
+            if (timer !== undefined) {
+                window.clearInterval(timer);
+                timer = undefined;
+            }
+
+            // Al detenerla, deja la frase completa visible.
+            banner.classList.remove("is-animating");
+            };
+
+            const updateAnimation = () => {
+            stopAnimation();
+
+            if (
+                !isVisible ||
+                isPaused ||
+                document.hidden ||
+                reducedMotion.matches
+            ) {
+                return;
+            }
+
+            banner.classList.add("is-animating");
+
+            timer = window.setInterval(() => {
+                currentMessage = (currentMessage + 1) % messages.length;
+                showMessage();
+            }, 5500);
+            };
+
+            pauseButton?.addEventListener("click", () => {
+            isPaused = !isPaused;
+
+            pauseButton.setAttribute("aria-pressed", String(isPaused));
+            pauseButton.textContent = isPaused
+                ? "Reanudar animación"
+                : "Pausar animación";
+
+            updateAnimation();
+            });
+
+            const observer = new IntersectionObserver(
+            ([entry]) => {
+                isVisible = entry.isIntersecting;
+                updateAnimation();
+            },
+            { threshold: 0.15 },
+            );
+
+            observer.observe(banner);
+
+            document.addEventListener("visibilitychange", updateAnimation);
+            reducedMotion.addEventListener("change", updateAnimation);
         }
-      }
+        }
+
     </script>
   </body>
 </html>
