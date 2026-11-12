@@ -1617,3 +1617,32 @@ h1 {
     font-size: clamp(48px, 6vw, 110px);
   }
 }
+
+/* Márgenes comunes para HERO, cabecera y frases */
+:root {
+  --gym-side-padding: clamp(24px, 4vw, 80px);
+}
+
+.hero .hero-content,
+.hero .hero-bottom,
+.header .header-inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: var(--gym-side-padding);
+}
+
+.rhythm-banner__inner {
+  padding-inline: var(--gym-side-padding);
+}
+
+.rhythm-banner__pause {
+  right: var(--gym-side-padding);
+}
+
+@media (max-width: 700px) {
+  :root {
+    --gym-side-padding: 20px;
+  }
+}
