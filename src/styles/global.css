@@ -1959,3 +1959,114 @@ h1 {
   margin-inline: 0;
   padding-inline: var(--gym-side-padding);
 }
+
+.first-session {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: clamp(24px, 4vw, 80px);
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .first-session {
+    padding-inline: 20px;
+  }
+}
+
+.faq-section {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: clamp(24px, 4vw, 80px);
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .faq-section {
+    padding-inline: 20px;
+  }
+}
+
+.footer {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: clamp(24px, 4vw, 80px);
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    padding-inline: 20px;
+  }
+}
+
+.footer-logo {
+  display: block;
+  width: 160px;
+  max-width: 100%;
+  align-self: start;
+}
+
+.footer-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.footer-logo:focus-visible {
+  outline: 2px solid #ffd32a;
+  outline-offset: 6px;
+}
+
+/* Imagen promocional enlazada al formulario */
+.spot-section > .spot-promo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  display: block;
+  z-index: 1;
+}
+
+.spot-promo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right center;
+}
+
+.spot-gradient {
+  pointer-events: none;
+}
+
+/* El contenido no bloquea el enlace de la imagen */
+.spot-content {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.spot-content a,
+.spot-content button {
+  pointer-events: auto;
+}
+
+.spot-promo:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -3px;
+}
+
+@media (max-width: 700px) {
+  /* Cabecera negra mientras el menú está abierto */
+  .header:has(.menu-toggle[aria-expanded="true"]) {
+    background-color: #050505;
+  }
+
+  .header nav.open {
+    background-color: #050505;
+  }
+}

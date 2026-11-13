@@ -347,13 +347,20 @@ const faqs = [
         </div>
       </section>
       <section class="spot-section" id="spot">
-        <img
-          src="/demo-gimnasio-gym/images/spot.webp"
-          alt="Detalle de una mano sujetando una mancuerna en el gimnasio"
-          width="650"
-          height="650"
-          loading="lazy"
-        />
+        <a
+          class="spot-promo"
+          href="#reserva"
+          aria-label="Reserva tu sesión de prueba con la promoción del 30 %"
+        >
+          <img
+            src="/demo-gimnasio-gym/images/spot.webp"
+            alt="30 % de descuento durante los 3 primeros meses. Promoción ilustrativa de esta demo."
+            loading="lazy"
+          />
+        </a>
+
+
+
         <div class="spot-gradient"></div>
 
         <div class="spot-content">
@@ -541,7 +548,7 @@ const faqs = [
           <span>Y todo empieza por venir.</span>
         </p>
       </section>
-      <section class="section container first-session" id="primera-sesion">
+      <section class="section first-session" id="primera-sesion">
         <div>
           <p class="eyebrow">NO TIENES QUE SABER POR DÓNDE EMPEZAR</p>
           <h2>
@@ -586,7 +593,7 @@ const faqs = [
           loading="lazy"
         />
       </section>
-      <section class="section container faq-section" id="preguntas">
+      <section class="section faq-section" id="preguntas">
         <h2>
           Preguntas sobre
           <br />
@@ -660,13 +667,17 @@ const faqs = [
         </div>
       </section>
     </main>
-    <footer class="footer container">
+    <footer class="footer">
       <div class="footer-main">
-        <a class="wordmark" href="#inicio">
-          A TU
-          <br />
-          RITMO<span>.</span>
-        </a>
+          
+          <a class="footer-logo" href="#inicio" aria-label="GYM — Volver al inicio">
+            <img
+              src="/demo-gimnasio-gym/images/logo-gym.png"
+              alt="GYM"
+              loading="lazy"
+            />
+          </a>
+        
         <div>
           <h3>El gimnasio</h3>
           <a href="#gimnasio">Instalaciones</a>
