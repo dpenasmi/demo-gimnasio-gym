@@ -1,25 +1,41 @@
 ---
 import "../styles/global.css";
+// Metadatos de la demo. La URL canónica usa el dominio configurado en Astro.
+const seoTitle =
+  "Gimnasio en Barcelona · Fuerza y clases en grupo | A Tu Ritmo";
+const seoDescription =
+  "Demo de gimnasio en Barcelona: entrenamiento personal, fuerza, boxeo, spinning y yoga. Descubre A Tu Ritmo, una creación de DPM Evolución Digital.";
+const canonicalUrl = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site)
+  : undefined;
+const shareImage = Astro.site
+  ? new URL("/demo-gimnasio-gym/images/hero.webp", Astro.site)
+  : undefined;
+
 const trainings = [
   {
     title: "Fuerza",
     image: "fuerza",
-    desc: "Construye tu fuerza, repetición a repetición.",
+    alt: "Una persona entrena con una barra en la sala de fuerza",
+    desc: "Aprende a entrenar con pesas y máquinas para desarrollar fuerza y mejorar tu condición física.",
   },
   {
     title: "Funcional",
     image: "funcional",
-    desc: "Muévete mejor. Gana energía para tu día.",
+    alt: "Una mujer realiza ejercicios con cuerdas de entrenamiento",
+    desc: "Trabaja fuerza, resistencia y coordinación con ejercicios variados y adaptados a tu nivel.",
   },
   {
     title: "Entrenamiento personal",
     image: "personal",
-    desc: "Tu objetivo, con alguien a tu lado.",
+    alt: "Un entrenador acompaña a una mujer durante una sesión personal",
+    desc: "Entrena con un profesional que te acompaña y adapta las sesiones a tus objetivos.",
   },
   {
     title: "Movilidad",
     image: "movilidad",
-    desc: "Encuentra espacio para moverte y respirar.",
+    alt: "Una mujer realiza un estiramiento lateral sobre una esterilla",
+    desc: "Trabaja la amplitud de movimiento y el control corporal con ejercicios de movilidad.",
   },
 ];
 const classes = [
@@ -62,20 +78,32 @@ const classes = [
 ];
 const faqs = [
   [
-    "¿Puedo empezar de cero?",
-    "Claro. Tu primera sesión empieza por conocerte. Adaptamos los ejercicios y la intensidad a tu punto de partida.",
+    "¿Puedo empezar en el gimnasio sin experiencia?",
+    "Sí. La propuesta de A Tu Ritmo es acompañarte desde tu nivel. La primera sesión sirve para conocer tus objetivos y orientarte con los ejercicios y la intensidad, aunque lleves tiempo sin hacer deporte.",
   ],
   [
-    "¿Qué tengo que traer?",
-    "Ropa cómoda, zapatillas deportivas, una toalla y agua. Del resto, nos encargamos juntos.",
+    "¿Qué diferencia hay entre entrenamiento personal y clases en grupo?",
+    "El entrenamiento personal permite trabajar con atención individual y sesiones adaptadas a tus objetivos. Las clases en grupo siguen una actividad compartida, con orientación durante los ejercicios y la motivación de entrenar acompañado.",
   ],
   [
-    "¿Cómo reservo mi prueba?",
-    "Completa el formulario y elige la franja que prefieres. En esta demo puedes probar el recorrido sin enviar tus datos.",
+    "¿Qué clases en grupo puedo descubrir?",
+    "Esta demo presenta circuito, fuerza en grupo, movilidad, boxeo, spinning y yoga. Explora las tarjetas y consulta los horarios de ejemplo para conocer la propuesta.",
   ],
   [
-    "¿Hay clases en grupo?",
-    "Sí. Puedes descubrir circuito, fuerza en grupo, movilidad, boxeo, spinning y kickboxing. Consulta el horario de ejemplo y encuentra tu ritmo.",
+    "¿Qué actividad puedo elegir si estoy empezando?",
+    "Depende de tus preferencias y de tu punto de partida. Puedes explorar el trabajo de fuerza, el entrenamiento funcional, la movilidad o las clases dirigidas. En una primera sesión, el equipo te orientaría para elegir una actividad y una intensidad adecuadas.",
+  ],
+  [
+    "¿Qué tengo que llevar a una primera sesión?",
+    "Ropa cómoda, una toalla y agua. Para la sala de fuerza y las actividades de cardio, lleva zapatillas deportivas. En actividades como yoga, consulta antes el material y el calzado necesarios.",
+  ],
+  [
+    "¿Cómo puedo reservar una sesión de prueba?",
+    "Puedes probar el formulario y seleccionar una franja horaria. A Tu Ritmo es una demo de DPM Evolución Digital: no se envían ni guardan los datos y no se genera una reserva real.",
+  ],
+  [
+    "¿Dónde está el gimnasio y cuáles son sus tarifas?",
+    "A Tu Ritmo es una demostración de diseño web para un gimnasio en Barcelona. No representa un centro abierto al público ni dispone de dirección o tarifas comerciales. Los horarios que se muestran son ilustrativos.",
   ],
 ];
 ---
@@ -85,12 +113,23 @@ const faqs = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>A Tu Ritmo · Tu primera repetición empieza aquí</title>
-    <meta
-      name="description"
-      content="Demo de gimnasio en Barcelona. Fuerza, funcional, entrenamiento personal y movilidad. Tu primer día, a tu ritmo. Una creación de DPM Evolución Digital."
-    />
+    <title>{seoTitle}</title>
+    <meta name="description" content={seoDescription} />
     <meta name="theme-color" content="#000000" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="A Tu Ritmo · Demo DPM" />
+    <meta property="og:title" content={seoTitle} />
+    <meta property="og:description" content={seoDescription} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl.href} />}
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl.href} />}
+    {shareImage && <meta property="og:image" content={shareImage.href} />}
+    {shareImage && (
+      <meta
+        property="og:image:alt"
+        content="Una entrenadora acompaña a una mujer durante su entrenamiento de fuerza"
+      />
+    )}
     <link
       rel="icon"
       type="image/svg+xml"
@@ -147,22 +186,25 @@ const faqs = [
             <span></span> BARCELONA · TU BARRIO. TU GIMNASIO.
           </p>
           <h1 id="hero-title">
-            Todo empieza
+            Gimnasio
             <br />
-            con una
-            <br />
-            <span>repetición.</span>
+            en Barcelona.
           </h1>
+          <p class="hero-promise">
+            Tu objetivo,
+            <br />
+            nuestro compromiso.
+          </p>
           <p class="hero-subtitle">
-            Tu gimnasio en Barcelona.
-            <br class="mobile-only" /> Tu punto de partida.
+            Entrenamiento personal, fuerza y clases en grupo. Empieza desde tu
+            nivel, con acompañamiento desde el primer día.
           </p>
           <div class="hero-actions">
             <a class="button" href="#reserva">
-              Reserva tu prueba <span aria-hidden="true">↗</span>
+              Reserva tu sesión de prueba <span aria-hidden="true">↗</span>
             </a>
             <button class="button button-white" data-spot>
-              Ver el spot <span aria-hidden="true">▶</span>
+              Tú puedes <span aria-hidden="true">▶</span>
             </button>
           </div>
         </div>
@@ -211,18 +253,25 @@ const faqs = [
         </div>
       </section>
 
-      <section class="section container" id="entrenamientos">
+      <section class="section" id="entrenamientos">
         <div class="section-heading">
-          <h2>Entrena como quieras</h2>
-          <p>Encuentra lo que te mueve.</p>
+          <h2>
+            Fuerza, funcional
+            <br />y entrenamiento personal
+          </h2>
         </div>
+        <p class="section-intro">
+          Espacios para entrenar, cuidarte y desconectar. Descubre nuestra sala
+          de fuerza, zona funcional y ring de boxeo, además de las cabinas de
+          fisioterapia, la sauna, los vestuarios y la zona de relax.
+        </p>
         <div class="training-grid">
           {trainings.map((item, i) => (
             <a class="training-card" href="#reserva">
               <div class="image-wrap">
                 <img
                   src={`/demo-gimnasio-gym/images/${item.image}.webp`}
-                  alt={item.desc}
+                  alt={item.alt}
                   width="320"
                   height="490"
                   loading="lazy"
@@ -239,11 +288,15 @@ const faqs = [
         </div>
       </section>
       <section class="section classes-section" id="clases">
-        <div class="container">
+        <div class="classes-inner">
           <div class="section-heading">
             <div>
               <p class="eyebrow">BUENA ENERGÍA. MEJOR COMPAÑÍA.</p>
-              <h2>Clases en grupo</h2>
+              <h2>
+                Clases en grupo
+                <br />
+                en Barcelona
+              </h2>
             </div>
             <div class="slider-controls">
               <div class="slider-dots" aria-hidden="true">
@@ -259,6 +312,11 @@ const faqs = [
               </button>
             </div>
           </div>
+          <p class="section-intro">
+            Circuito, fuerza, movilidad, boxeo, spinning y yoga. Descubre
+            diferentes formas de entrenar acompañado y encuentra la actividad
+            que mejor encaja contigo.
+          </p>
           <div
             class="class-slider"
             tabindex="0"
@@ -297,22 +355,31 @@ const faqs = [
           loading="lazy"
         />
         <div class="spot-gradient"></div>
-        <div class="container spot-content">
-          <p class="eyebrow">CADA VICTORIA TIENE UN PRINCIPIO</p>
+
+        <div class="spot-content">
+          <p class="eyebrow">EMPIEZA DESDE TU NIVEL</p>
+
           <h2>
-            La primera
+            Gimnasio para
             <br />
-            repetición
+            principiantes
           </h2>
+
+          <p class="spot-description">
+            ¿Quieres empezar a entrenar o volver a hacer deporte? En GYM te
+            acompañamos desde el primer día, con ejercicios adaptados a tu nivel
+            y a tus objetivos.
+          </p>
+
           <button class="play-link" data-spot>
             <span class="play-circle" aria-hidden="true">
               ▶
             </span>
-            Ver el spot
+            Tú puedes
           </button>
         </div>
       </section>
-      <section class="section container" id="gimnasio">
+      <section class="section" id="gimnasio">
         <div class="section-heading">
           <h2>
             Conoce el
@@ -321,30 +388,112 @@ const faqs = [
           </h2>
           <p>Un espacio para dar tu siguiente paso.</p>
         </div>
-        <div class="spaces-grid">
+        <p class="section-intro">
+          Espacios para entrenar, cuidarte y desconectar. Descubre nuestra sala
+          de fuerza, zona funcional y ring de boxeo, además de las cabinas de
+          fisioterapia, la sauna, los vestuarios y la zona de relax.
+        </p>
+
+        <div class="spaces-controls" aria-label="Controles de instalaciones">
+          <button
+            type="button"
+            data-space-direction="-1"
+            aria-label="Ver instalaciones anteriores"
+            aria-controls="spaces-slider"
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            data-space-direction="1"
+            aria-label="Ver instalaciones siguientes"
+            aria-controls="spaces-slider"
+          >
+            →
+          </button>
+        </div>
+        <div
+          class="spaces-slider"
+          id="spaces-slider"
+          tabindex="0"
+          role="region"
+          aria-label="Instalaciones del gimnasio"
+        >
           <figure>
             <img
               src="/demo-gimnasio-gym/images/sala.webp"
-              alt="Sala de fuerza con bancos, discos y estructuras de entrenamiento"
-              width="650"
-              height="375"
+              alt="Sala de fuerza con bancos, barras y discos"
+              width="900"
+              height="550"
               loading="lazy"
             />
-            <figcaption>
-              Sala de fuerza <span aria-hidden="true">↗</span>
-            </figcaption>
+            <figcaption>Sala de fuerza</figcaption>
           </figure>
+
           <figure>
             <img
               src="/demo-gimnasio-gym/images/zona.webp"
-              alt="Zona funcional con kettlebells, cajones y césped"
-              width="650"
-              height="375"
+              alt="Zona de entrenamiento funcional con kettlebells y cuerdas"
+              width="900"
+              height="550"
               loading="lazy"
             />
-            <figcaption>
-              Zona funcional <span aria-hidden="true">↗</span>
-            </figcaption>
+            <figcaption>Zona funcional</figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="/demo-gimnasio-gym/images/ring-boxeo.webp"
+              alt="Ring de boxeo en el gimnasio"
+              width="900"
+              height="550"
+              loading="lazy"
+            />
+            <figcaption>Ring de boxeo</figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="/demo-gimnasio-gym/images/fisioterapia.webp"
+              alt="Cabina de fisioterapia con camilla"
+              width="900"
+              height="550"
+              loading="lazy"
+            />
+            <figcaption>Cabinas de fisioterapia</figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="/demo-gimnasio-gym/images/sauna.webp"
+              alt="Interior de la sauna con bancos de madera"
+              width="900"
+              height="550"
+              loading="lazy"
+            />
+            <figcaption>Sauna</figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="/demo-gimnasio-gym/images/vestuarios.webp"
+              alt="Vestuarios del gimnasio con taquillas y bancos"
+              width="900"
+              height="550"
+              loading="lazy"
+            />
+            <figcaption>Vestuarios</figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="/demo-gimnasio-gym/images/relax.webp"
+              alt="Zona de relax con asientos para descansar"
+              width="1800"
+              height="700"
+              loading="lazy"
+            />
+            <figcaption>Zona de relax</figcaption>
           </figure>
         </div>
       </section>
@@ -356,7 +505,7 @@ const faqs = [
             le da vida
           </h2>
           <p>
-            Gente real. Objetivos propios.
+            Objetivos propios. Ritmos diferentes.
             <br />
             Ganas compartidas.
           </p>
@@ -390,10 +539,15 @@ const faqs = [
         <div>
           <p class="eyebrow">NO TIENES QUE SABER POR DÓNDE EMPEZAR</p>
           <h2>
-            Tu primera
+            ¿Empiezas
             <br />
-            sesión
+            en el gimnasio?
           </h2>
+          <p class="section-intro first-session-intro">
+            Te acompañamos desde el primer día. No necesitas experiencia previa:
+            hablamos de tus objetivos y te orientamos para empezar desde tu
+            nivel.
+          </p>
           <ol class="steps">
             <li>
               <span>01</span>
@@ -428,9 +582,9 @@ const faqs = [
       </section>
       <section class="section container faq-section" id="preguntas">
         <h2>
-          Preguntas
+          Preguntas sobre
           <br />
-          frecuentes
+          empezar a entrenar
         </h2>
         <div class="faq-list">
           {faqs.map(([q, a]) => (
@@ -510,7 +664,7 @@ const faqs = [
         <div>
           <h3>El gimnasio</h3>
           <a href="#gimnasio">Instalaciones</a>
-          <a href="#primera-sesion">El equipo</a>
+          <a href="#primera-sesion">Tu primera sesión</a>
           <a href="#comunidad">La comunidad</a>
         </div>
         <div>
@@ -537,7 +691,7 @@ const faqs = [
         </div>
       </div>
       <div class="footer-bottom">
-        <span>DEMO DE DPM EVOLUCIÓN DIGITAL</span>
+        <span>DEMO DE DPM EVOLUCIÓN DIGITAL · IMÁGENES CREADAS CON IA</span>
         <span>Diseñada para empezar. Hecha para seguir.</span>
         <a href="#inicio" aria-label="Volver arriba">
           ↑
@@ -575,6 +729,21 @@ const faqs = [
               <td>Movilidad</td>
               <td>Lun · Mié · Vie</td>
               <td>12:00 · 20:00</td>
+            </tr>
+            <tr>
+              <td>Boxeo</td>
+              <td>Mar · Jue</td>
+              <td>11:00 · 20:00</td>
+            </tr>
+            <tr>
+              <td>Spinning</td>
+              <td>Lun · Mié · Vie</td>
+              <td>07:30 · 19:30</td>
+            </tr>
+            <tr>
+              <td>Yoga</td>
+              <td>Mar · Jue · Sáb</td>
+              <td>09:00 · 18:00</td>
             </tr>
           </tbody>
         </table>
@@ -909,6 +1078,54 @@ const faqs = [
 
           document.addEventListener("visibilitychange", updateAnimation);
           reducedMotion.addEventListener("change", updateAnimation);
+        }
+      }
+
+      // Carrusel de instalaciones, independiente del carrusel de clases.
+      {
+        const section = document.querySelector<HTMLElement>("#gimnasio");
+        const slider = section?.querySelector<HTMLElement>(".spaces-slider");
+        const previous = section?.querySelector<HTMLButtonElement>(
+          '[data-space-direction="-1"]',
+        );
+        const next = section?.querySelector<HTMLButtonElement>(
+          '[data-space-direction="1"]',
+        );
+
+        if (slider) {
+          const reducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+          );
+          const updateControls = () => {
+            const maxScroll = Math.max(
+              0,
+              slider.scrollWidth - slider.clientWidth,
+            );
+            if (previous) previous.disabled = slider.scrollLeft <= 2;
+            if (next) next.disabled = slider.scrollLeft >= maxScroll - 2;
+          };
+          const move = (direction: number) => {
+            const card = slider.querySelector<HTMLElement>("figure");
+            if (!card) return;
+            const gap = parseFloat(getComputedStyle(slider).columnGap) || 0;
+            slider.scrollBy({
+              left: (card.getBoundingClientRect().width + gap) * direction,
+              behavior: reducedMotion.matches ? "instant" : "smooth",
+            });
+          };
+          previous?.addEventListener("click", () => move(-1));
+          next?.addEventListener("click", () => move(1));
+          slider.addEventListener("scroll", updateControls, { passive: true });
+          slider.addEventListener("keydown", (event) => {
+            if (event.target !== slider) return;
+            if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+              event.preventDefault();
+              move(event.key === "ArrowRight" ? 1 : -1);
+            }
+          });
+          const resizeObserver = new ResizeObserver(updateControls);
+          resizeObserver.observe(slider);
+          updateControls();
         }
       }
     </script>
