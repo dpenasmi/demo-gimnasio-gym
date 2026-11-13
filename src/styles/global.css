@@ -2070,3 +2070,59 @@ h1 {
     background-color: #050505;
   }
 }
+
+@media (max-width: 700px) {
+  .spot-section {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+    padding: 40px 20px;
+    gap: 28px;
+  }
+
+  .spot-section > .spot-content {
+    position: relative;
+    order: 1;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    pointer-events: auto;
+  }
+
+  .spot-content h2 {
+    font-size: clamp(28px, 7.5vw, 38px);
+    line-height: 1.05;
+  }
+
+  .spot-content .spot-description {
+    max-width: none;
+  }
+
+  .spot-section > .spot-promo {
+    position: relative;
+    inset: auto;
+    order: 2;
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    margin: 0;
+    z-index: auto;
+  }
+
+  .spot-section > .spot-promo img {
+    position: static;
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .spot-section > .spot-gradient {
+    display: none;
+  }
+}
