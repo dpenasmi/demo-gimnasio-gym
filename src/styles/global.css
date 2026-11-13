@@ -1917,3 +1917,45 @@ h1 {
     font-size: clamp(29px, 7.5vw, 44px);
   }
 }
+
+.spaces-controls {
+  align-items: center;
+}
+
+.spaces-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-right: 15px;
+}
+
+.spaces-dots i {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: #555;
+}
+
+.spaces-dots i.active {
+  background: var(--yellow);
+}
+
+@media (max-width: 700px) {
+  .spaces-dots {
+    gap: 4px;
+    margin-right: 5px;
+  }
+
+  .spaces-dots i {
+    width: 16px;
+  }
+}
+
+/* Comunidad alineada con el resto de secciones */
+#comunidad {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: var(--gym-side-padding);
+}
